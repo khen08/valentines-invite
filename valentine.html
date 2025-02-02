@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hey Yeye! 🌸</title>
+    <style>
+      /* Dynamic background gradient animation */
+      body {
+        background: linear-gradient(-45deg, #ffe6f2, #ff99cc, #ff6699, #ff3366);
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s ease infinite;
+        font-family: "Arial", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        transition: background-color 1s ease;
+        position: relative;
+        overflow: hidden;
+        /* Custom heart cursor everywhere */
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='32'%3E💘%3C/text%3E%3C/svg%3E")
+            16 16,
+          auto;
+      }
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Container for text elements to improve readability */
+      .text-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      /* Remove text shadow since the container provides contrast */
+      h1,
+      #countdown,
+      .celebration-msg,
+      .side-note {
+        color: #ff6699;
+      }
+
+      h1 {
+        margin: 10px 0;
+      }
+
+      .celebration-msg {
+        font-size: 28px;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      .side-note {
+        font-size: 20px;
+        margin-top: 10px;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        position: relative;
+        min-height: 60px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .btn {
+        font-size: 24px;
+        padding: 15px 30px;
+        border: none;
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='32'%3E💘%3C/text%3E%3C/svg%3E")
+            16 16,
+          auto;
+        margin: 10px;
+        border-radius: 10px;
+      }
+
+      .yes-btn {
+        background-color: #ff6699;
+        color: white;
+      }
+
+      .no-btn {
+        background-color: #ccc;
+        color: black;
+        position: static;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='32'%3E💘%3C/text%3E%3C/svg%3E")
+            16 16,
+          auto;
+      }
+
+      .gif-container {
+        display: none;
+        margin-top: 20px;
+        max-width: 90vw;
+        max-height: 50vh;
+        overflow: hidden;
+      }
+
+      .gif-container img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .falling-flowers {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .flower {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-image: url("assets/images/sakura.png");
+        background-size: cover;
+        opacity: 0.7;
+        animation: fall linear infinite;
+        z-index: 1;
+      }
+
+      @keyframes fall {
+        from {
+          transform: translateY(-100vh) rotate(0deg);
+          opacity: 0.8;
+        }
+        to {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0.2;
+        }
+      }
+
+      #countdown {
+        font-size: 24px;
+        margin: 10px 0;
+      }
+
+      /* Redesigned music player button */
+      #music-player {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        opacity: 0.3;
+        transition: opacity 0.3s;
+      }
+
+      #music-player:hover {
+        opacity: 1;
+      }
+
+      #music-player button {
+        background: linear-gradient(135deg, #ff6699, #ff3366);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='32'%3E💘%3C/text%3E%3C/svg%3E")
+            16 16,
+          auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s, transform 0.3s;
+      }
+
+      #music-player button:hover {
+        background: linear-gradient(135deg, #ff3366, #ff6699);
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="bg-music" loop>
+      <source src="assets/audio/cute-music.mp3" type="audio/mpeg" />
+    </audio>
+    <div id="music-player">
+      <button onclick="toggleMusic()">🎵</button>
+    </div>
+    <!-- Hypno image -->
+    <img
+      id="hypno-image"
+      src="assets/gifs/hypno.gif"
+      width="250px"
+      alt="Cute GIF"
+    />
+
+    <!-- Text container for readability -->
+    <div class="text-container">
+      <h1 id="main-heading">
+        Hi Yeye! Would you go on a date with me this Valentine's 🌸? Pwease?
+        🥺👉👈
+      </h1>
+      <div id="countdown"></div>
+      <div class="celebration-msg" id="celebration-msg">
+        Every awkward moment becomes meme material, fr. Vibe check: 100. 💯🙌🏼
+      </div>
+      <div class="side-note" id="side-note">
+        P.S. – Trust, I'll snap some fire pics for our feed. 📸🔥
+      </div>
+      <div class="container">
+        <button class="btn yes-btn" onclick="celebrate()">Yes!</button>
+        <button class="btn no-btn" onmouseover="moveNoButton()">No...</button>
+      </div>
+    </div>
+
+    <div class="gif-container">
+      <img id="reaction-gif" src="" alt="Reaction GIF" />
+    </div>
+
+    <div class="falling-flowers"></div>
+
+    <script>
+      const audio = document.getElementById("bg-music");
+      function toggleMusic() {
+        audio.paused ? audio.play() : audio.pause();
+      }
+
+      // Typewriter effect for text (e.g., updating the main heading)
+      function typeWriter(element, text, i = 0, delay = 100) {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          setTimeout(() => typeWriter(element, text, i + 1, delay), delay);
+        }
+      }
+
+      // celebrate() function uses typewriter animation and plays a sound effect.
+      function celebrate() {
+        // Play bleep sound effect
+        const bleepSound = new Audio("assets/audio/bleep.mp3");
+        bleepSound.play();
+
+        // Hide the hypno image.
+        document.getElementById("hypno-image").style.display = "none";
+
+        // Clear and animate the main heading with typewriter effect.
+        const mainHeading = document.getElementById("main-heading");
+        mainHeading.textContent = "";
+        const newText =
+          "Yo, real talk: our date's gonna be low-key legendary, no cap. 🔥😎🚀";
+        typeWriter(mainHeading, newText, 0, 80);
+
+        // Hide the Yes/No buttons.
+        document.querySelector(".container").style.display = "none";
+
+        // Show the celebratory message and side note.
+        document.getElementById("celebration-msg").style.opacity = 1;
+        document.getElementById("side-note").style.opacity = 1;
+
+        // Optionally, change the background color (if desired).
+        document.body.style.backgroundColor = "#fff0f5";
+
+        // Optionally, show a reaction GIF.
+        const gifContainer = document.querySelector(".gif-container");
+        const gifImage = document.getElementById("reaction-gif");
+        gifImage.src = "assets/gifs/hivalentine.gif";
+        gifContainer.style.display = "block";
+
+        // Create falling flowers for extra celebration.
+        createFallingFlowers();
+      }
+
+      function moveNoButton() {
+        const noBtn = document.querySelector(".no-btn");
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        // Calculate new position within the viewport.
+        const maxX = window.innerWidth - btnWidth;
+        const maxY = window.innerHeight - btnHeight;
+        const newX = Math.random() * maxX;
+        const newY = Math.random() * maxY;
+        noBtn.style.position = "fixed";
+        noBtn.style.left = `${newX}px`;
+        noBtn.style.top = `${newY}px`;
+      }
+
+      function createFallingFlowers() {
+        const flowerContainer = document.querySelector(".falling-flowers");
+        flowerContainer.innerHTML = "";
+        for (let i = 0; i < 80; i++) {
+          const flower = document.createElement("div");
+          flower.className = "flower";
+          flower.style.left = Math.random() * 100 + "vw";
+          flower.style.animationDuration = Math.random() * 4 + 6 + "s";
+          flower.style.animationDelay = Math.random() * 3 + "s";
+          flower.style.opacity = Math.random() * 0.6 + 0.2;
+          flower.style.transform = `scale(${
+            Math.random() * 0.7 + 0.3
+          }) rotate(${Math.random() * 360}deg)`;
+          flowerContainer.appendChild(flower);
+        }
+      }
+
+      function updateCountdown() {
+        const valentine = new Date("February 14, 2025 00:00:00").getTime();
+        function tick() {
+          const now = new Date().getTime();
+          const timeLeft = valentine - now;
+          const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor(
+            (timeLeft % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+          document.getElementById(
+            "countdown"
+          ).innerHTML = `Countdown to Valentine's: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+          requestAnimationFrame(tick);
+        }
+        tick();
+      }
+      updateCountdown();
+
+      window.addEventListener("DOMContentLoaded", (event) => {
+        // Attempt autoplay but allow user control.
+        audio.play().catch(() => {});
+        createFallingFlowers();
+      });
+    </script>
+  </body>
+</html>
