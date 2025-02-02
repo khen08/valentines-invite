@@ -246,11 +246,15 @@
         }
       }
 
-      // celebrate() function uses typewriter animation and plays a sound effect.
+      // celebrate() function now plays the bleep sound first and then starts the background audio
       function celebrate() {
-        // Play bleep sound effect
+        // Play bleep sound effect first
         const bleepSound = new Audio("assets/audio/bleep.mp3");
         bleepSound.play();
+        // After a short delay, start the background audio
+        setTimeout(() => {
+          audio.play();
+        }, 1000);
 
         // Hide the hypno image.
         document.getElementById("hypno-image").style.display = "none";
