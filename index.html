@@ -42,12 +42,12 @@
         background-color: rgba(255, 255, 255, 0.9);
         padding: 20px;
         border-radius: 10px;
-        display: inline-block;
-        margin-bottom: 20px;
         text-align: center;
+        max-width: 600px;
+        width: 90%;
+        margin-bottom: 20px;
       }
 
-      /* Remove text shadow since the container provides contrast */
       h1,
       #countdown,
       .celebration-msg,
@@ -190,6 +190,27 @@
         background: linear-gradient(135deg, #ff3366, #ff6699);
         transform: scale(1.1);
       }
+
+      /* Responsive adjustments */
+      @media only screen and (max-width: 600px) {
+        .text-container {
+          width: 90%;
+          padding: 10px;
+        }
+        h1 {
+          font-size: 20px;
+        }
+        #countdown,
+        .celebration-msg,
+        .side-note {
+          font-size: 16px;
+        }
+        .btn {
+          font-size: 18px;
+          padding: 10px 20px;
+          margin: 5px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -203,7 +224,7 @@
     <img
       id="hypno-image"
       src="assets/gifs/hypno.gif"
-      width="250px"
+      width="250"
       alt="Cute GIF"
     />
 
@@ -246,15 +267,15 @@
         }
       }
 
-      // celebrate() function now plays the bleep sound first and then starts the background audio
+      // celebrate() function uses typewriter animation and plays a sound effect.
       function celebrate() {
-        // Play bleep sound effect first
+        // Play bleep sound effect
         const bleepSound = new Audio("assets/audio/bleep.mp3");
         bleepSound.play();
-        // After a short delay, start the background audio
+        // After a 300ms delay, play the background audio
         setTimeout(() => {
           audio.play();
-        }, 1000);
+        }, 300);
 
         // Hide the hypno image.
         document.getElementById("hypno-image").style.display = "none";
